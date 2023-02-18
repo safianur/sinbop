@@ -1,6 +1,10 @@
 <?php 
 include 'assets/php/koneksi.php';
 include 'sub/header.php';
+
+$no = 1;
+$data = mysqli_query($koneksi, "SELECT * FROM kategori");
+
 ?>
 
 <div class="row">
@@ -11,20 +15,19 @@ include 'sub/header.php';
 					<span aria-hidden="true">&times;</span>
 				</button>
 				Data berhasil ditambahkan
-			</div> -->
-			<!-- <div class="alert alert-success alert-dismissible animated fadeInDown" id="feedback" role="alert">
+			</div>
+			<div class="alert alert-success alert-dismissible animated fadeInDown" id="feedback" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				Data berhasil diupdate
-			</div> -->
-			<!-- <div class="alert alert-success alert-dismissible animated fadeInDown" id="feedback" role="alert">
+			</div>
+			<div class="alert alert-success alert-dismissible animated fadeInDown" id="feedback" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 				Data berhasil dihapus
 			</div> -->
-
 			<div class="card-header">
 				<h1 style="text-align: center">Data Kategori</h1>
 				<button type="button" class="btn btn-primary btn-bg-gradient-x-purple-blue box-shadow-2"
@@ -41,22 +44,20 @@ include 'sub/header.php';
 					</tr>
 					</thead>
 					<tbody>
-					<?php 
-						$no = 1;
-						$data = mysqli_query($koneksi, "SELECT * FROM kategori");
-                        while ($d = mysqli_fetch_array($data)) {
-					?>
+					<?php foreach ($data as $d) :?>
 						<tr>
 							<td><?= $no++; ?></td>
 							<td><?= $d['nm_kategori']; ?></td>
 							<td>
 								<button class="btn btn-success btn-sm  btn-bg-gradient-x-blue-green box-shadow-2 gaji-edit"
-									data-toggle="modal" data-target="#ubah<?= $d['id_kategori']?>"><i class="ft-edit"></i></button>
+									data-toggle="modal" data-target="#ubah<?= $d['id_kategori']?>">
+									<i class="ft-edit"></i>Edit</button>
 								<button class="btn btn-danger btn-sm  btn-bg-gradient-x-red-pink box-shadow-2" 
-									data-toggle="modal" data-target="#hapus<?= $d['id_kategori']?>" $value=""><i class="ft-trash"></i>Hapus</button>
+									data-toggle="modal" data-target="#hapus<?= $d['id_kategori']?>" >
+									<i class="ft-trash"></i>Hapus</button>
 							</td>
 						</tr>
-					<?php } ?>
+					<?php endforeach ?>
 					</tbody>
 				</table>
 			</div>
@@ -83,7 +84,7 @@ include 'sub/header.php';
 				</div>
 				<div class="modal-footer">
 					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-red-pink" data-dismiss="modal" value="Tutup">
-					<input type="submit" class="btn btn-primary btn-bg-gradient-x-blue-cyan" name="simpan" value="Simpan">
+					<input type="submit" class="btn btn-primary btn-bg-gradient-x-blue-cyan" name="tambah" value="Simpan">
 				</div>
 			</form>
 		</div>
@@ -101,24 +102,19 @@ include 'sub/header.php';
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<?php
-				$id = $_GET['id_kategori'];
-				$data = mysqli_query($koneksi, "SELECT * FROM kategori WHERE id_kategori ='$id'");
-				while ($d = mysqli_fetch_array($data)) {
-				?>
-					<form action="assets/php/kategori/aksi-ubah.php" method="post">
-						<div class="modal-body" id="updateformgaji">
-							<fieldset class="form-group floating-label-form-group">
-								<label for="kategori">Kategori</label>
-								<input type="text" class="form-control" name="nm_kategori" value="<?= $d['nm_kategori'] ?>" id="kategori" placeholder="kategori" autocomplete="off" required>
-							</fieldset>
-						</div>
-						<div class="modal-footer">
-							<input type="reset" class="btn btn-secondary btn-bg-gradient-x-red-pink" data-dismiss="modal" value="Tutup">
-							<input type="submit" class="btn btn-primary btn-bg-gradient-x-blue-cyan" name="update" value="Update">
-						</div>
-					</form>
-				<?php } ?>
+				<form action="assets/php/kategori/aksi-ubah.php" method="post">
+					<input type="hidden" name="id-kategori" value="<?= $d['id_kategori']?>">
+					<div class="modal-body" id="updateformkategori">
+						<fieldset class="form-group floating-label-form-group">
+							<label for="kategori">Kategori</label>
+							<input type="text" class="form-control" name="nm_kategori" value="<?= $d['nm_kategori'] ?>" id="kategori" placeholder="kategori" autocomplete="off" required>
+						</fieldset>
+					</div>
+					<div class="modal-footer">
+						<input type="reset" class="btn btn-secondary btn-bg-gradient-x-red-pink" data-dismiss="modal" value="Tutup">
+						<input type="submit" class="btn btn-primary btn-bg-gradient-x-blue-cyan" name="update" value="Update">
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -126,7 +122,7 @@ include 'sub/header.php';
 
 <!-- Modal hapus -->
 <?php foreach ($data as $d) : ?>
-	<div class="modal fade text-left" id="hapus<?= $d['id_kategori']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+	<div class="modal fade text-left" id="hapus<?= $d['id_kategori'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -137,8 +133,9 @@ include 'sub/header.php';
 				</div>
 				<div class="modal-footer">
 					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
-					<div id="hapuskategori">
-						<a href="assets/php/kategori/aksi-hapus.php?id-kategori=<?= $d['id_kategori']; ?>" class="btn btn-danger">Hapus</a>
+					<div name="hapus">
+						<a href="assets/php/kategori/aksi-hapus.php?id-kategori=<?= $d['id_kategori']; ?>"
+							class="btn btn-danger">Hapus</a>
 					</div>
 				</div>
 			</div>
