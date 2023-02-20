@@ -29,7 +29,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 				Data berhasil dihapus
 			</div> -->
 			<div class="card-header">
-				<h1 style="text-align: center">Data Kategori</h1>
+				<h1 style="text-align: center">List Kategori</h1>
 				<button type="button" class="btn btn-primary btn-bg-gradient-x-purple-blue box-shadow-2"
 					data-toggle="modal" data-target="#tambah"><i class="ft-plus-circle"></i> Tambah Kategori
 				</button>
@@ -79,7 +79,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 				<div class="modal-body">
 					<fieldset class="form-group floating-label-form-group">
 						<label for="kategori">Kategori</label>
-						<input type="text" class="form-control" name="nm_kategori" id="kategori" placeholder="kategori" autocomplete="off" required>
+						<input type="text" class="form-control" name="nm_kategori" id="kategori" placeholder="nama kategori" autocomplete="off" required>
 					</fieldset>
 				</div>
 				<div class="modal-footer">
@@ -133,7 +133,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 				</div>
 				<div class="modal-footer">
 					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
-					<div name="hapus">
+					<div name="hapuskategori">
 						<a href="assets/php/kategori/aksi-hapus.php?id-kategori=<?= $d['id_kategori']; ?>"
 							class="btn btn-danger">Hapus</a>
 					</div>
