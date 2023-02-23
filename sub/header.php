@@ -9,7 +9,7 @@
 	<meta name="description" content="Sistem Informasi Biaya Operasional PT. INKA Banyuwangi">
 	<meta name="keywords" content="Sistem Informasi Biaya Operasional PT. INKA Banyuwangi">
 	<meta name="author" content="Jihad">
-	<title># - SInBOp</title>
+	<title># - Sistem Informasi Penggunaan Biaya Operasional</title>
 	<link rel="apple-touch-icon" href="./assets/images/ico/apple-icon-120.png">
 	<link rel="shortcut icon" type="image/x-icon" href="./assets/images/logo/63-512.png">
 	<link

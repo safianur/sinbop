@@ -53,7 +53,7 @@ if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
 				<div>
 					<fieldset class="form-group floating-label-form-group">
 						<div class="row mt-2">
-							<div class="col-sm-8 mb-3">
+							<div class="col-sm-8 mb-1">
 								<form action="" method="post" class="form-group row">
 									<div class="col-3">
 										<label for="dari">Dari</label>	
@@ -70,8 +70,8 @@ if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
 								</form>
 							</div>
 							<div class="col-sm-4 mb-2"><br>
-								<a href="#" class="btn btn-success mr-2" style="float:right" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
-								<a href="#" class="btn btn-danger mr-2" style="float:right" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+								<a href="assets/php/laporan/format-excel.php?tgl-awal=<?= $dari ?>&tgl-akhir=<?= $sampai ?>" class="btn btn-success mr-2" style="float:right" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+								<a href="assets/php/laporan/format-pdf.php?tgl-awal=<?= $dari ?>&tgl-akhir=<?= $sampai ?>" class="btn btn-danger mr-2" style="float:right" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
 							</div>
 						</div>
 					</fieldset>
@@ -98,7 +98,7 @@ if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
 									<td colspan="4"><?= $b['nm_kategori'] ?></td>
 								</tr>
 								<?php
-									$c = mysqli_query($koneksi, "SELECT * FROM pengeluaran $sqlperiode and id_kategori='$b[id_kategori]'");
+									$c = mysqli_query($koneksi, "SELECT * FROM pengeluaran $sqlperiode and id_kategori='$b[id_kategori]' ORDER BY tanggal");
 									while ($lp = mysqli_fetch_array($c)){
 								?>
 									<tr>

@@ -3,7 +3,7 @@ include 'assets/php/koneksi.php';
 include 'sub/header.php';
 
 $no = 1;
-$data = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
+$data = mysqli_query($koneksi, "SELECT * FROM pengeluaran JOIN kategori ON kategori.id_kategori=pengeluaran.id_kategori");
 ?>
 
 <div class="row">
@@ -34,12 +34,13 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
 				</button>
 			</div>
 			<div class="card-body">
-				<table class="table table-bordered zero-configuration" >
+				<table class="table table-bordered zero-configuration" width="100%" cellspacing="0">
 					<thead>
 					<tr>
 						<th>No</th>
 						<th>Tanggal</th>
 						<th>Nama Pembelanja</th>
+						<th>Kategori</th>
 						<th>Item Belanja</th>
 						<th>Jumlah</th>
 						<td style="text-align: center"><i class="ft-settings spinner"></i></td>
@@ -51,6 +52,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
 							<td><?= $no++ ?></td>
 							<td><?= tgl_indo($d['tanggal']) ?></td>
 							<td><?=  $d['nm_pembelanja'] ?></td>
+							<td><?=  $d['nm_kategori'] ?></td>
 							<td><?=  $d['item_belanja'] ?></td>
 							<td><?= rupiah ($d['jumlah']) ?></td>
 							<td>
