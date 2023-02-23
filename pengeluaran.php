@@ -209,13 +209,13 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran");
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-					<div class="modal-footer">
-						<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
-						<div id="hapusgaji">
+				<div class="modal-footer">
+					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
+					<div name="hapuspengeluaran">
 						<a href="assets/php/pengeluaran/aksi-hapus.php?id-pengeluaran=<?= $d['id_pengeluaran']; ?>"
 							class="btn btn-danger">Hapus</a>
-						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -16,6 +16,10 @@
 		href="./assets/css/fonts/css93c2.css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700"
 		rel="stylesheet">
 
+	<!-- Custom fonts for this template-->
+    <link href="./assets/fontawesome-free-6.2.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
 	<!-- BEGIN: Vendor CSS-->
 	<link rel="stylesheet" type="text/css" href="./assets/vendors/css/vendors.min.css">
 	<link rel="stylesheet" type="text/css" href="./assets/vendors/css/forms/toggle/switchery.min.css">

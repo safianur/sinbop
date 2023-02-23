@@ -163,7 +163,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM biaya");
 				</div>
 					<div class="modal-footer">
 						<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
-						<div id="hapusbiaya">
+						<div name="hapusbiaya">
 						<a href="assets/php/biaya/aksi-hapus.php?id-biaya=<?= $d['id_biaya']; ?>"
 							class="btn btn-danger">Hapus</a>
 						</div>
