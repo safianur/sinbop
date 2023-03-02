@@ -60,6 +60,46 @@
 <script src="./assets/js/core/sigaka.js" type="text/javascript"></script>
 <!-- END: Page JS-->
 
+<!-- Page Plugins grafik -->
+<script src="./assets/js/highcharts/highcharts.js"></script>
+<script src="./assets/js/highcharts/exporting.js"></script>
+<script src="./assets/js/highcharts/export-data.js"></script>
+<script src="./assets/js/highcharts/accessibility.js"></script>
+
+<script type="text/javascript">
+
+    Highcharts.chart('pengeluaran', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Data Pengeluaran Kategori PDAM, Token Listrik, & Iuran Kebersihan Pada Tahun <?= date('Y') ?>'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah Pengeluaran'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Pengeluaran',
+            data: [16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
+                22.0, 17.8]
+        }]
+    });
+    
+</script>
+
 </body>
 <!-- END: Body-->
 

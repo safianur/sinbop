@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+	header("Location: index.php");
+}
+
 include 'assets/php/koneksi.php';
 include 'sub/header.php';
 
@@ -29,9 +35,11 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran JOIN kategori ON kateg
 			</div> -->
 			<div class="card-header">
 				<h1 style="text-align: center">Rincian Pengeluaran Biaya Operasional</h1>
+			<?php if($_SESSION['level_user'] == "Admin") { ?>
 				<button type="button" class="btn btn-primary btn-bg-gradient-x-purple-blue box-shadow-2" 
                 	data-toggle="modal" data-target="#tambah"><i class="ft-plus-circle"></i> Tambah Nota
 				</button>
+			<?php } ?>
 			</div>
 			<div class="card-body">
 				<table class="table table-bordered zero-configuration" width="100%" cellspacing="0">
@@ -43,7 +51,9 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran JOIN kategori ON kateg
 						<th>Kategori</th>
 						<th>Item Belanja</th>
 						<th>Jumlah</th>
+					<?php if($_SESSION['level_user'] == "Admin") { ?>
 						<td style="text-align: center"><i class="ft-settings spinner"></i></td>
+					<?php } ?>
 					</tr>
 					</thead>
 					<tbody>
@@ -55,6 +65,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran JOIN kategori ON kateg
 							<td><?=  $d['nm_kategori'] ?></td>
 							<td><?=  $d['item_belanja'] ?></td>
 							<td><?= rupiah ($d['jumlah']) ?></td>
+						<?php if($_SESSION['level_user'] == "Admin") { ?>
 							<td>
 
 								<button class="btn btn-success btn-sm  btn-bg-gradient-x-blue-green box-shadow-2 gaji-edit"
@@ -64,6 +75,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM pengeluaran JOIN kategori ON kateg
 								data-toggle="modal" data-target="#hapus<?=$d['id_pengeluaran']?>" value="">
 								<i class="ft-trash"></i>Hapus</button>
 							</td>
+						<?php } ?>
 						</tr>
 						<?php endforeach ?>
 					</tbody>

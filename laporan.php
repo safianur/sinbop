@@ -1,5 +1,11 @@
 <?php 
+session_start();
 error_reporting(0);
+
+if(!isset($_SESSION['username'])){
+	header("Location: index.php");
+};
+
 include 'assets/php/koneksi.php';
 include 'sub/header.php';
 

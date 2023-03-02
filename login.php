@@ -1,0 +1,49 @@
+<?php 
+// mengaktifkan session pada php
+session_start();
+
+// menghubungkan php dengan koneksi database
+include 'assets/php/koneksi.php';
+
+if(!isset($_SESSION['username'])){
+	header("Location: index.php");
+}
+
+// menangkap data yang dikirim dari form login
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// menyeleksi data user dengan username dan password yang sesuai
+$login = mysqli_query($koneksi,"SELECT * FROM user WHERE username='$username' and password='$password'");
+// menghitung jumlah data yang ditemukan
+$cek = mysqli_num_rows($login);
+// cek apakah username dan password di temukan pada database
+if($cek > 0){
+	$_SESSION['username']=$username;
+	$_SESSION['status']="login";
+	$data = mysqli_fetch_assoc($login);
+	// cek jika user login sebagai admin
+	if($data['level_user']=="Admin"){
+		// buat session login dan username
+		$_SESSION['username'] = $username;
+		$_SESSION['level_user'] = "Admin";
+		// alihkan ke halaman dashboard admin
+		header("location: dashboard.php");
+
+	// cek jika user login sebagai pengurus
+	}else if($data['level_user']=="User"){
+		// buat session login dan username
+		$_SESSION['username'] = $username;
+		$_SESSION['level_user'] = "User";
+		// alihkan ke halaman dashboard pengurus
+		header("location: dashboard.php");
+
+	}else{
+		// alihkan ke halaman login kembali
+		header("<script>alert('Maaf Level User tidak Ditemukan!');window.location='index.php';</script>");
+	}	
+}else{
+	header("<script>alert('Maaf Username atau Password tidak Ditemukan!');window.location='index.php';</script>");
+}
+ 
+?>

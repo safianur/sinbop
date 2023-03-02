@@ -1,165 +1,119 @@
-<?php include 'sub/header.php'; ?>
+<?php 
+session_start();
 
+if(!isset($_SESSION['username'])){
+	header("Location: index.php");
+};
+
+include 'sub/header.php';
+include 'assets/php/koneksi.php';
+
+$month = date('m');
+$year = date('Y');
+?>
+
+<!-- <div class="card">
+	<div class="alert alert-success alert-dismissible animated fadeInDown"
+			style="position: absolute; width: 100%; z-index: 2" id="feedback"
+			role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		Berhasil Login
+	</div>
+	<div class="alert alert-warning alert-dismissible animated fadeInDown"
+			style="position: absolute; width: 100%; z-index: 2" id="feedback"
+			role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		Sudah Login
+	</div>
+</div> -->
+<!-- Content Row -->
 <div class="row">
-	<div class="col-md-12">
-		<div class="card">
-				<!-- <div class="alert alert-success alert-dismissible animated fadeInDown"
-					 style="position: absolute; width: 100%; z-index: 2" id="feedback"
-					 role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					Berhasil Login
+	<?php
+		$ambil = mysqli_query($koneksi,"SELECT COUNT(item_belanja) as item FROM pengeluaran WHERE month(tanggal) = $month AND year(tanggal) = $year");
+		$itembelanja = mysqli_fetch_array($ambil);
+	?>
+	<!-- Earnings (Monthly) Card Example -->
+	<div class="col-xl-3 col-md-6 mb-5">
+		<div class="card border-left-primary shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+							Jumlah Item Belanja Bulan <?= date('F') ?></div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?= $itembelanja['item'] ?> Item Belanja</div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-calendar fa-2x text-gray-300"></i>
+					</div>
 				</div>
-				<div class="alert alert-warning alert-dismissible animated fadeInDown"
-					 style="position: absolute; width: 100%; z-index: 2" id="feedback"
-					 role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					Sudah Login
-				</div> -->
+			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-3 col-md-12">
-				<div class="row">
-					<div class="col-12">
-						<div class="card pull-up bg-gradient-directional-danger">
-							<div class="card-header bg-hexagons-danger">
-								<h4 class="card-title white">Data Kategori</h4>
-								<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-								<div class="heading-elements">
-									<ul class="list-inline mb-0">
-										<li>
-											<a class="btn btn-sm btn-white danger box-shadow-1 round pull-right"
-											   href="#">Lihat<i
-													class="ft-arrow-right pl-1"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-content collapse show bg-hexagons-danger">
-								<div class="card-body">
-									<div class="media d-flex">
-										<div class="align-self-center width-100">
-											<div><i class="ft-layers" style="color: white;font-size: 500%"></i></div>
-										</div>
-										<div class="media-body text-right mt-1">
-											<h3 class="font-large-1 white">5</h3>
-											<h6 class="mt-1"><span class="text-muted white">Jumlah Data Kategori</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+	</div>
+	<?php
+		$ambil = mysqli_query($koneksi,"SELECT * FROM biaya WHERE month(tanggal) = $month AND year(tanggal) = $year");
+		$biaya = mysqli_fetch_array($ambil);
+	?>
+	<!-- Earnings (Monthly) Card Example -->
+	<div class="col-xl-3 col-md-6 mb-5">
+		<div class="card border-left-success shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+							Biaya Operasional (<?= date('M') ?>)</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?= rupiah($biaya['saldo_biaya']) ?></div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-12">
-				<div class="row">
-					<div class="col-12">
-						<div class="card pull-up bg-gradient-directional-danger">
-							<div class="card-header bg-hexagons-danger">
-								<h4 class="card-title white">Biaya Operasional</h4>
-								<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-								<div class="heading-elements">
-									<ul class="list-inline mb-0">
-										<li>
-											<a class="btn btn-sm btn-white danger box-shadow-1 round pull-right"
-											   href="#">Lihat<i
-													class="ft-arrow-right pl-1"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-content collapse show bg-hexagons-danger">
-								<div class="card-body">
-									<div class="media d-flex">
-										<div class="align-self-center width-100">
-											<div><i class="icon-wallet" style="color: white;font-size: 500%"></i>
-											</div>
-										</div>
-										<div class="media-body text-right mt-1">
-											<h3 class="font-large-1 white">Rp. 45.000.000</h3>
-											<h6 class="mt-1"><span class="text-muted white">Jumlah Biaya Operasional di Tahun Ini
-											</h6>
-										</div>
-									</div>
-								</div>
+		</div>
+	</div>
+
+	<?php
+		$ambil = mysqli_query($koneksi,"SELECT SUM(pengeluaran.jumlah) as total FROM pengeluaran
+			WHERE month(tanggal) = $month AND year(tanggal) = $year");
+		$pengeluaran = mysqli_fetch_array($ambil);
+	?>
+	<!-- Earnings (Monthly) Card Example -->
+	<div class="col-xl-3 col-md-6 mb-5">
+		<div class="card border-left-info shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Pengeluaran (<?= date('M') ?>)
+						</div>
+						<div class="row no-gutters align-items-center">
+							<div class="col-auto">
+								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= rupiah($pengeluaran['total']) ?></div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-12">
-				<div class="row">
-					<div class="col-12">
-						<div class="card pull-up bg-gradient-directional-danger">
-							<div class="card-header bg-hexagons-danger">
-								<h4 class="card-title white">Pengeluaran</h4>
-								<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-								<div class="heading-elements">
-									<ul class="list-inline mb-0">
-										<li>
-											<a class="btn btn-sm btn-white danger box-shadow-1 round pull-right"
-											   href="#">Lihat<i
-													class="ft-arrow-right pl-1"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-content collapse show bg-hexagons-danger">
-								<div class="card-body">
-									<div class="media d-flex">
-										<div class="align-self-center width-100">
-											<div><i class="ft-calendar" style="color: white;font-size: 500%"></i>
-											</div>
-										</div>
-										<div class="media-body text-right mt-1">
-											<h3 class=" font-large-1 white">Rp. 45.000.000</h3>
-											<h6 class="mt-1"><span class="text-muted white">Jumlah Pengeluaran di Tahun Ini
-											</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="col-auto">
+						<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-12">
-				<div class="row">
-					<div class="col-12">
-						<div class="card pull-up bg-gradient-directional-danger">
-							<div class="card-header bg-hexagons-danger">
-								<h4 class="card-title white">Laporan</h4>
-								<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-								<div class="heading-elements">
-									<ul class="list-inline mb-0">
-										<li>
-											<a class="btn btn-sm btn-white danger box-shadow-1 round pull-right"
-											   href="#">Lihat<i
-													class="ft-arrow-right pl-1"></i></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="card-content collapse show bg-hexagons-danger">
-								<div class="card-body">
-									<div class="media d-flex">
-										<div class="align-self-center width-100">
-											<div><i class="ft-file" style="color: white;font-size: 500%"></i>
-											</div>
-										</div>
-										<div class="media-body text-right mt-1">
-											<h3 class="font-large-1 white">10</h3>
-											<h6 class="mt-1"><span class="text-muted white">Jumlah Laporan
-											</h6>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+		</div>
+	</div>
+
+	<!-- Pending Requests Card Example -->
+	<div class="col-xl-3 col-md-6 mb-5">
+		<div class="card border-left-warning shadow h-100 py-2">
+			<div class="card-body">
+				<div class="row no-gutters align-items-center">
+					<div class="col mr-2">
+						<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+							Deviasa Selisih (<?= date('M') ?>)</div>
+						<div class="h5 mb-0 font-weight-bold text-gray-800"><?= rupiah($biaya['saldo_biaya']-$pengeluaran['total']) ?></div>
+					</div>
+					<div class="col-auto">
+						<i class="fas fa-comments fa-2x text-gray-300"></i>
 					</div>
 				</div>
 			</div>
@@ -167,18 +121,10 @@
 	</div>
 </div>
 
-<!-- Content Row -->
-<!-- <div class="card shadow mb-4"> -->
-	<!-- Card Header - Dropdown -->
-	<!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		<h6 class="m-0 font-weight-bold text-primary">Pendapatan Bulanan PT Cipta Karya Bagus Periode <?= date('Y') ?></h6>
-	</div> -->
-	<!-- Card Body -->
-	<!-- <div class="card-body">
-		<div class="chart-area ml-5">
-			<canvas id="pendapatanAreaChart" width="1500" height="500"></canvas>
-		</div>
-	</div>
-</div> -->
+<figure class="highcharts-figure">
+	<div id="pengeluaran"></div>
+	<p class="highcharts-description">
+	</p>
+</figure>
 
 <?php include 'sub/footer.php'; ?>

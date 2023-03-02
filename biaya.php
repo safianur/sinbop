@@ -1,4 +1,10 @@
 <?php 
+session_start();
+
+if(!isset($_SESSION['username'])){
+	header("Location: index.php");
+}
+
 include 'assets/php/koneksi.php';
 include 'sub/header.php';
 
@@ -29,9 +35,11 @@ $data = mysqli_query($koneksi, "SELECT * FROM biaya");
 			</div> -->
 			<div class="card-header">
 				<h1 style="text-align: center">Saldo Biaya Operasional</h1>
+			<?php if($_SESSION['level_user'] == "Admin") { ?>
 				<button type="button" class="btn btn-primary btn-bg-gradient-x-purple-blue box-shadow-2" 
                 	data-toggle="modal" data-target="#tambah"><i class="ft-plus-circle"></i> Tambah Saldo
 				</button>
+			<?php } ?>
 			</div>
 			<div class="card-body">
 				<table class="table table-bordered zero-configuration" >
@@ -40,7 +48,9 @@ $data = mysqli_query($koneksi, "SELECT * FROM biaya");
 						<th>No</th>
 						<th>Tanggal</th>
 						<th>Saldo Biaya Operasional</th>
+					<?php if($_SESSION['level_user'] == "Admin") { ?>
 						<td style="text-align: center"><i class="ft-settings spinner"></i></td>
+					<?php } ?>
 					</tr>
 					</thead>
 					<tbody>
@@ -49,6 +59,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM biaya");
 						<td><?= $no++ ?></td>
                         <td><?= tgl_indo ($d['tanggal']) ?></td>
 						<td><?= rupiah ($d['saldo_biaya']) ?></td>
+					<?php if($_SESSION['level_user'] == "Admin") { ?>
 						<td>
 
 							<button class="btn btn-success btn-sm  btn-bg-gradient-x-blue-green box-shadow-2 gaji-edit"
@@ -59,6 +70,7 @@ $data = mysqli_query($koneksi, "SELECT * FROM biaya");
                             <i class="ft-trash"></i>Hapus</button>
 
 						</td>
+					<?php } ?>
 					</tr>
 					<?php endforeach ?>
 					</tbody>

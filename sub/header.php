@@ -1,3 +1,8 @@
+<?php
+	error_reporting(0);
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -97,17 +102,17 @@
 								class="ficon ft-maximize"></i></a></li>
 				</ul>
 				<ul class="nav navbar-nav float-right">
-					<li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
-																   href="#" data-toggle="dropdown"> <span
-								class="avatar avatar-online"><img
+					<li class="dropdown dropdown-user nav-item">
+						<a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+							<span class="avatar avatar-online"><img
 									src="./assets/images/portrait/small/profil-circle-512.png"
 									alt="avatar"></span></a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<div class="arrow_box_right"><a class="dropdown-item" href="#"><span
-										class="avatar avatar-online"><strong>admin</strong></span><br>
+							<div class="arrow_box_right"><a class="dropdown-item" href="./user.php"><span
+										class="avatar avatar-online"><strong><?= $_SESSION['username'] ?></strong></span><br>
 									</span></a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="ft-power"></i>
+								<a class="dropdown-item" href="./logout.php"><i class="ft-power"></i>
 									Logout</a>
 							</div>
 						</div>

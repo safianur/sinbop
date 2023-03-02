@@ -9,7 +9,7 @@ include 'assets/php/koneksi.php';
 include 'sub/header.php';
 
 $no = 1;
-$data = mysqli_query($koneksi, "SELECT * FROM kategori");
+$data = mysqli_query($koneksi, "SELECT * FROM user");
 
 ?>
 
@@ -35,19 +35,14 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 				Data berhasil dihapus
 			</div> -->
 				<div class="card-header">
-					<h1 style="text-align: center">Daftar Kategori</h1>
-			<?php if($_SESSION['level_user'] == "Admin") { ?>
-					<button type="button" class="btn btn-primary btn-bg-gradient-x-purple-blue box-shadow-2"
-						data-toggle="modal" data-target="#tambah"><i class="ft-plus-circle"></i> Tambah Kategori
-					</button>
-			<?php } ?>
+					<h1 style="text-align: center">Daftar Pengguna Akun</h1>
 				</div>
 			<div class="card-body">
 				<table class="table table-bordered zero-configuration" >
 					<thead>
 					<tr>
 						<th>No</th>
-						<th>Nama Kategori</th>
+						<th>Username</th>
 					<?php if($_SESSION['level_user'] == "Admin") { ?>
 						<td style="text-align: center"><i class="ft-settings spinner"></i></td>
 					<?php } ?>
@@ -57,14 +52,14 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 					<?php foreach ($data as $d) :?>
 						<tr>
 							<td><?= $no++; ?></td>
-							<td><?= $d['nm_kategori']; ?></td>
+							<td><?= $d['username']; ?></td>
 						<?php if($_SESSION['level_user'] == "Admin") { ?>
 							<td>
 								<button class="btn btn-success btn-sm  btn-bg-gradient-x-blue-green box-shadow-2 gaji-edit"
-									data-toggle="modal" data-target="#ubah<?= $d['id_kategori']?>">
+									data-toggle="modal" data-target="#ubah<?= $d['id_user']?>">
 									<i class="ft-edit"></i>Edit</button>
 								<button class="btn btn-danger btn-sm  btn-bg-gradient-x-red-pink box-shadow-2" 
-									data-toggle="modal" data-target="#hapus<?= $d['id_kategori']?>" >
+									data-toggle="modal" data-target="#hapus<?= $d['id_user']?>" >
 									<i class="ft-trash"></i>Hapus</button>
 							</td>
 						<?php } ?>
@@ -77,35 +72,9 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 	</div>
 </div>
 
-<!-- Modal tambah -->
-<div class="modal fade text-left" id="tambah" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h3 class="modal-title" id="myModalLabel35"> Tambah Data Kategori</h3>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form method="post" action="assets/php/kategori/aksi-tambah.php">
-				<div class="modal-body">
-					<fieldset class="form-group floating-label-form-group">
-						<label for="kategori">Kategori</label>
-						<input type="text" class="form-control" name="nm_kategori" id="kategori" placeholder="nama kategori" autocomplete="off" required>
-					</fieldset>
-				</div>
-				<div class="modal-footer">
-					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-red-pink" data-dismiss="modal" value="Tutup">
-					<input type="submit" class="btn btn-primary btn-bg-gradient-x-blue-cyan" name="tambah" value="Simpan">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
 <!-- Modal ubah -->
 <?php foreach ($data as $d) : ?>
-	<div class="modal fade text-left" id="ubah<?= $d['id_kategori']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+	<div class="modal fade text-left" id="ubah<?= $d['id_user']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -114,12 +83,14 @@ $data = mysqli_query($koneksi, "SELECT * FROM kategori");
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<form action="assets/php/kategori/aksi-ubah.php" method="post">
-					<input type="hidden" name="id-kategori" value="<?= $d['id_kategori']?>">
-					<div class="modal-body" id="updateformkategori">
+				<form action="assets/php/user/aksi-ubah.php" method="post">
+					<input type="hidden" name="id-user" value="<?= $d['id_user']?>">
+					<div class="modal-body" id="updateformuser">
 						<fieldset class="form-group floating-label-form-group">
-							<label for="kategori">Kategori</label>
-							<input type="text" class="form-control" name="nm_kategori" value="<?= $d['nm_kategori'] ?>" id="kategori" placeholder="kategori" autocomplete="off" required>
+							<label for="username">Username</label>
+							<input type="text" class="form-control" name="username" value="<?= $d['username'] ?>" id="username" placeholder="username" autocomplete="off" required>
+							<label for="password">Password</label>
+							<input type="text" class="form-control" name="password" value="<?= $d['password'] ?>" id="password" placeholder="password" autocomplete="off" required>
 						</fieldset>
 					</div>
 					<div class="modal-footer">
