@@ -73,11 +73,10 @@ body {
 </style>
 <body>
     <div style="text-align: center">
-        <h3>RINCIAN PENGELUARAN BIAYA OPERASIONAL</h3>
-        <h3>KANTOR INKA PERWAKILAN BANYUWANGI</h3>
-        <h5>Periode ' . $dari = date('F Y') . '</h5>
-    </div>
-    <hr>';
+        <h3>RINCIAN PENGELUARAN BIAYA OPERASIONAL<br>
+        KANTOR INKA PERWAKILAN BANYUWANGI<br>
+        Periode ' . date('F Y', strtotime($dari)) . '</h3>
+    </div>';
     $html.=
     '<table class="table table-bordered" width="100%" cellspacing="0">
       <thead>
@@ -90,38 +89,36 @@ body {
       </thead>
       <tbody>';
             $no = 1;
-            $a = mysqli_query($koneksi, "SELECT * FROM kategori");
-            while ($b = mysqli_fetch_array($a)){
+            $a = mysqli_query($koneksi, "SELECT * FROM kategori JOIN pengeluaran ON 
+            pengeluaran.id_kategori=kategori.id_kategori $sqlperiode and 
+            kategori.id_kategori=pengeluaran.id_kategori ORDER BY tanggal");
+            while ($tampil = mysqli_fetch_array($a)){
             $html .= 
                 '<tr>
-                    <td colspan="4">' . $b['nm_kategori'] . '</td>
-                </tr>';
-            $c = mysqli_query($koneksi, "SELECT * FROM pengeluaran $sqlperiode and id_kategori='$b[id_kategori]' 
-              ORDER BY tanggal");
-            while ($lp = mysqli_fetch_array($c)){ 
-            $html .=
-                '<tr>
+                    <td colspan="4">' . $tampil['nm_kategori'] . '</td>
+                </tr>
+                <tr>
                     <td>' . $no++ . '</td>
-                    <td>' . tgl_indo($lp['tanggal']) . '</td>
-                    <td>' . $lp['item_belanja'] . '</td>
-                    <td>' . rupiah($lp['jumlah']) . '</td>
+                    <td>' . tgl_indo($tampil['tanggal']) . '</td>
+                    <td>' . $tampil['item_belanja'] . '</td>
+                    <td>' . rupiah($tampil['jumlah']) . '</td>
                 </tr>';
-            $total += $lp['jumlah'];
-            } }
+            $total += $tampil['jumlah'];
+            } 
             $html .=
                 '<tr>
-                    <td colspan="3" style="text-align: right; font-weight: bold; text-transform: uppercase;">TOTAL BELANJA</td>
+                    <td colspan="3" style="text-align: left; font-weight: bold; text-transform: uppercase;">TOTAL BELANJA</td>
                     <td style="font-weight: bold;">' . rupiah($total) . '</td>
                 </tr>';
                     $ambil = mysqli_query($koneksi,"SELECT * FROM biaya $periode");
                     $tampil = mysqli_fetch_array($ambil);
                 $html.=
                 '<tr>
-                    <td colspan="3" style="text-align: right; font-weight: bold; text-transform: uppercase;">BIAYA OPERASIONAL</td>
+                    <td colspan="3" style="text-align: left; font-weight: bold; text-transform: uppercase;">BIAYA OPERASIONAL</td>
                     <td style="font-weight: bold;">' . rupiah($tampil['saldo_biaya']) . '</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: right; font-weight: bold; text-transform: uppercase;">DEVIASI SELISIH LEBIH/KURANG</td>
+                    <td colspan="3" style="text-align: left; font-weight: bold; text-transform: uppercase;">DEVIASI SELISIH LEBIH/KURANG</td>
                     <td style="font-weight: bold;">' . rupiah($tampil['saldo_biaya']-$total) . '</td>
                 </tr>
         </tbody>

@@ -113,18 +113,25 @@ $year = date('Y');
 						<div class="h5 mb-0 font-weight-bold text-gray-800"><?= rupiah($biaya['saldo_biaya']-$pengeluaran['total']) ?></div>
 					</div>
 					<div class="col-auto">
-						<i class="fas fa-comments fa-2x text-gray-300"></i>
+						<i class="fas fa-money-bill fa-2x text-gray-300"></i>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Card Header - Dropdown -->
+	<div class="card shadow col-md-12 mb-4">
+		<!-- Card Header - Dropdown -->
+		<div class="card-header py-1 d-flex flex-row align-items-center justify-content-between">
+			<h6 class="m-0 font-weight-bold text-primary">Pengeluaran Kantor INKA Banyuwangi Periode <?= date('Y') ?></h6>
+		</div>
+		<!-- Card Body -->
+		<div class="card-body">
+			<div class="chart-area ml-5" style="width: 1200px; height: 450px">
+				<canvas id="lineChart"></canvas>
+			</div>
+		</div>
+	</div>
 </div>
-
-<figure class="highcharts-figure">
-	<div id="pengeluaran"></div>
-	<p class="highcharts-description">
-	</p>
-</figure>
 
 <?php include 'sub/footer.php'; ?>

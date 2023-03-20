@@ -105,19 +105,19 @@ $data = mysqli_query($koneksi, "SELECT * FROM user");
 
 <!-- Modal hapus -->
 <?php foreach ($data as $d) : ?>
-	<div class="modal fade text-left" id="hapus<?= $d['id_kategori'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+	<div class="modal fade text-left" id="hapus<?= $d['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" id="myModalLabel35"> Yakin Ingin Menghapus Kategori : <?= $d['nm_kategori'] ?> ?</h3>
+					<h3 class="modal-title" id="myModalLabel35"> Yakin Ingin Menghapus User : <?= $d['username'] ?> ?</h3>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-footer">
 					<input type="reset" class="btn btn-secondary btn-bg-gradient-x-blue-cyan" data-dismiss="modal" value="Tutup">
-					<div name="hapuskategori">
-						<a href="assets/php/kategori/aksi-hapus.php?id-kategori=<?= $d['id_kategori']; ?>"
+					<div name="hapususer">
+						<a href="assets/php/user/aksi-hapus.php?id-user=<?= $d['id_user']; ?>"
 							class="btn btn-danger">Hapus</a>
 					</div>
 				</div>

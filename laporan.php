@@ -12,7 +12,6 @@ include 'sub/header.php';
 $dari = '';
 $sampai = '';
 $sqlperiode = '';
-
 if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
     $dari       = isset($_POST['dari']) ? $_POST['dari'] : date('Y-m') . "-01";
     $sampai     = isset($_POST['sampai']) ? $_POST['sampai'] : date('Y-m-d');
@@ -97,25 +96,23 @@ if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
 							<?php
 								if (!empty($_POST['dari']) && !empty($_POST['sampai'])) {
 									$no = 1;
-									$a = mysqli_query($koneksi, "SELECT * FROM kategori");
-									while ($b = mysqli_fetch_array($a)){
+									$a = mysqli_query($koneksi, "SELECT * FROM kategori JOIN pengeluaran ON 
+										pengeluaran.id_kategori=kategori.id_kategori $sqlperiode and 
+										kategori.id_kategori=pengeluaran.id_kategori ORDER BY tanggal");
+									while ($tampil = mysqli_fetch_array($a)){
 							?>
 								<tr>
-									<td colspan="4"><?= $b['nm_kategori'] ?></td>
+									<td colspan="4"><?= $tampil['nm_kategori'] ?></td>
 								</tr>
-								<?php
-									$c = mysqli_query($koneksi, "SELECT * FROM pengeluaran $sqlperiode and id_kategori='$b[id_kategori]' ORDER BY tanggal");
-									while ($lp = mysqli_fetch_array($c)){
-								?>
 									<tr>
 										<td><?= $no++ ?></td>
-										<td><?= tgl_indo($lp['tanggal']) ?></td>
-										<td><?= $lp['item_belanja'] ?></td>
-										<td><?= rupiah($lp['jumlah']) ?></td>
+										<td><?= tgl_indo($tampil['tanggal']) ?></td>
+										<td><?= $tampil['item_belanja'] ?></td>
+										<td><?= rupiah($tampil['jumlah']) ?></td>
 									</tr>
 								<?php
-									$total += $lp['jumlah'];
-								} } ?>
+									$total += $tampil['jumlah'];
+								} ?>
 							<tr>
 								<td colspan="3" class="font-weight-bold text-uppercase">Total Belanja</td>
 								<td class="font-weight-bold"><?= rupiah($total) ?></td>

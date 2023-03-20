@@ -61,43 +61,64 @@
 <!-- END: Page JS-->
 
 <!-- Page Plugins grafik -->
-<script src="./assets/js/highcharts/highcharts.js"></script>
-<script src="./assets/js/highcharts/exporting.js"></script>
-<script src="./assets/js/highcharts/export-data.js"></script>
-<script src="./assets/js/highcharts/accessibility.js"></script>
+<script src="./assets/js/chart/chart.js"></script>
 
-<script type="text/javascript">
+<script>
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    var data = {
+        labels: [
+            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        ],
+        
+        datasets: [
+        <?php
+            $kat = mysqli_query($koneksi, "SELECT * FROM kategori");
+            while($tampil_kat = mysqli_fetch_array($kat)){
+        ?>
+        {
+            label:
+                <?php
+                    echo "'" .$tampil_kat['nm_kategori']. "'," ;
+                ?>
+                    
+            data: [
+                <?php
+                    $id_kat = $tampil_kat['id_kategori'];
+                    $ambil = mysqli_query($koneksi, "SELECT nm_kategori, DATE_FORMAT(tanggal, '%m-%Y') as tanggal, 
+                    SUM(jumlah) as jumlah FROM pengeluaran JOIN kategori ON kategori.id_kategori=pengeluaran.id_kategori 
+                    WHERE pengeluaran.id_kategori=$id_kat GROUP BY nm_kategori, MONTH(tanggal), YEAR(tanggal) DESC;");
+                    while ($data = mysqli_fetch_array($ambil)){
+                        echo "'" .$data['jumlah']. "'," ;
+                    }
+                ?>
+            ],
+        },
+            <?php } ?>
+        ]
+    }
 
-    Highcharts.chart('pengeluaran', {
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Data Pengeluaran Kategori PDAM, Token Listrik, & Iuran Kebersihan Pada Tahun <?= date('Y') ?>'
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Jumlah Pengeluaran'
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            legend: {
+                display: false
+            },
+            barValueSpacing: 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    gridLines: {
+                        color: "rgba(0, 0, 0, 0)",
+                    }
+                }]
             }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
-            }
-        },
-        series: [{
-            name: 'Pengeluaran',
-            data: [16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
-                22.0, 17.8]
-        }]
+        }
     });
-    
 </script>
 
 </body>
