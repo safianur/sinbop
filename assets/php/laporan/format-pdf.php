@@ -88,23 +88,27 @@ body {
           </tr>
       </thead>
       <tbody>';
-            $no = 1;
-            $a = mysqli_query($koneksi, "SELECT * FROM kategori JOIN pengeluaran ON 
-            pengeluaran.id_kategori=kategori.id_kategori $sqlperiode and 
-            kategori.id_kategori=pengeluaran.id_kategori ORDER BY tanggal");
-            while ($tampil = mysqli_fetch_array($a)){
-            $html .= 
-                '<tr>
-                    <td colspan="4">' . $tampil['nm_kategori'] . '</td>
-                </tr>
-                <tr>
-                    <td>' . $no++ . '</td>
-                    <td>' . tgl_indo($tampil['tanggal']) . '</td>
-                    <td>' . $tampil['item_belanja'] . '</td>
-                    <td>' . rupiah($tampil['jumlah']) . '</td>
-                </tr>';
-            $total += $tampil['jumlah'];
-            } 
+        $no = 1;
+        $a = mysqli_query($koneksi, "SELECT * FROM kategori");
+        while ($tampil = mysqli_fetch_array($a)){
+          $kat = $tampil['id_kategori'];
+          $b = mysqli_query($koneksi, "SELECT * FROM pengeluaran $sqlperiode and 
+            pengeluaran.id_kategori=$kat ORDER BY tanggal");
+          if(mysqli_num_rows($b) != 0){
+          $html .= 
+            '<tr>
+                <td colspan="4">' . $tampil['nm_kategori'] . '</td>
+            </tr>';
+              while ($ambil = mysqli_fetch_array($b)){
+            $html .=
+              '<tr>
+                  <td>' . $no++ . '</td>
+                  <td>' . tgl_indo($ambil['tanggal']) . '</td>
+                  <td>' . $ambil['item_belanja'] . '</td>
+                  <td>' . rupiah($ambil['jumlah']) . '</td>
+              </tr>';
+            $total += $ambil['jumlah'];
+            } } }
             $html .=
                 '<tr>
                     <td colspan="3" style="text-align: left; font-weight: bold; text-transform: uppercase;">TOTAL BELANJA</td>
