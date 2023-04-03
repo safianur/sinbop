@@ -15,7 +15,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Monitoring Keuangan Perwakilan Banyuwangi</title>
+	<link rel="shortcut icon" type="image/x-icon" href="./assets/images/logo/Tram-Baterai.png">
     <style>
         * {
             margin: 0;
@@ -25,7 +26,13 @@
         }
         
         body {
-            background-color: #C2DED1;
+            background: url(assets/images/backgrounds/keyeta-nih-3.png) no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            /* background:rgba(0, 0, 0, 0.5); */
+            /* background-color: #C2DED1; */
             height: 410px;
             margin: auto;
             width: 329px;
@@ -38,6 +45,7 @@
         }
         
         .container {
+            opacity: 0.9;
             width: 400px;
             min-height: 300px;
             background: #FFF;
@@ -46,11 +54,21 @@
             padding: 40px 30px;
         }
 
+        .avatar {
+            width: 100px;
+            height: 35px;
+            /* border-radius: 50%; */
+            position: absolute;
+            top: 160px;
+            left: calc(50% - 50px);
+        }
+
         .container .login-text {
             color: #111;
             font-weight: 500;
             font-size: 1.1rem;
             text-align: center;
+            margin-top: 40px;
             margin-bottom: 20px;
             display: block;
             text-transform: capitalize;
@@ -103,6 +121,7 @@
 <body>
     <div class="container">
         <form action="login.php" method="POST" class="login-username">
+            <img src="assets/images/logo/Logo-INKA.png" class="avatar">
             <p class="login-text" style="font-size: 150%; font-weight: 790;">Silahkan LogIn</p>
             <div class="input-group">
                 <input type="text" placeholder="username" name="username" autocomplete="off" required>

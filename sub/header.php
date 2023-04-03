@@ -14,9 +14,8 @@
 	<meta name="description" content="Sistem Informasi Biaya Operasional PT. INKA Banyuwangi">
 	<meta name="keywords" content="Sistem Informasi Biaya Operasional PT. INKA Banyuwangi">
 	<meta name="author" content="Jihad">
-	<title># - Sistem Informasi Penggunaan Biaya Operasional</title>
-	<link rel="apple-touch-icon" href="./assets/images/ico/apple-icon-120.png">
-	<link rel="shortcut icon" type="image/x-icon" href="./assets/images/logo/63-512.png">
+	<title>Monitoring Keuangan Perwakilan Banyuwangi</title>
+	<link rel="shortcut icon" type="image/x-icon" href="./assets/images/logo/Tram-Baterai.png">
 	<link
 		href="./assets/css/fonts/css93c2.css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700"
 		rel="stylesheet">
@@ -84,7 +83,9 @@
 
 <!-- BEGIN: Body-->
 <body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
-	  data-color="bg-gradient-x-purple-blue" data-col="2-columns">
+	  data-color="bg-gradient-x-purple-blue" data-col="-columns">
+<!-- <body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
+	  data-color="bg-gradient-x-black" data-col="-columns"> -->
 
 <!-- BEGIN: Header-->
 <nav
@@ -130,11 +131,15 @@
 	 data-img="./assets/images/backgrounds/02.jpg">
 	<div class="navbar-header">
 		<ul class="nav navbar-nav flex-row">
-			<li class="nav-item mr-auto"><a class="navbar-brand" href="">
+			<li class="nav-item mr-auto">
+				<a class="navbar-brand" href="">
 					<img class="brand-logo"
 						 alt="Chameleon admin logo"
-						 src="./assets/images/logo/63-512.png"/>
-					<h3 class="brand-text">SInBiO</h3></a></li>
+						 src="./assets/images/logo/keyeta-nih-2.png"/>
+					<h3 class="brand-text">MonKePerBa</h3>
+					<!-- <font size="1">(Monitoring Keuangan Perwakilan Banyuwangi)</font> -->
+				</a>
+			</li>
 			<li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
 		</ul>
 	</div>

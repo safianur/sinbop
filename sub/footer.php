@@ -70,31 +70,19 @@
             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
         ],
         
-        datasets: [
-        <?php
-            $kat = mysqli_query($koneksi, "SELECT * FROM kategori");
-            while($tampil_kat = mysqli_fetch_array($kat)){
-        ?>
-        {
-            label:
-                <?php
-                    echo "'" .$tampil_kat['nm_kategori']. "'," ;
-                ?>
-                    
+        datasets: [{
+            label: 
+                'Pengeluaran',
             data: [
                 <?php
-                    $id_kat = $tampil_kat['id_kategori'];
-                    $ambil = mysqli_query($koneksi, "SELECT nm_kategori, DATE_FORMAT(tanggal, '%m-%Y') as tanggal, 
-                    SUM(jumlah) as jumlah FROM pengeluaran JOIN kategori ON kategori.id_kategori=pengeluaran.id_kategori 
-                    WHERE pengeluaran.id_kategori=$id_kat GROUP BY nm_kategori, MONTH(tanggal), YEAR(tanggal) DESC;");
-                    while ($data = mysqli_fetch_array($ambil)){
-                        echo "'" .$data['jumlah']. "'," ;
+                    $data = mysqli_query($koneksi,"SELECT DATE_FORMAT(tanggal, '%m-%Y') as tanggal, SUM(jumlah) 
+                        AS jumlah FROM pengeluaran GROUP BY MONTH(tanggal), YEAR(tanggal) DESC;");
+                    while($tampil_jml = mysqli_fetch_array($data)){
+                        echo "'" .$tampil_jml['jumlah']. "'," ;
                     }
                 ?>
             ],
-        },
-            <?php } ?>
-        ]
+        }]
     }
 
     var myLineChart = new Chart(ctx, {
@@ -113,7 +101,7 @@
                 }],
                 xAxes: [{
                     gridLines: {
-                        color: "rgba(0, 0, 0, 0)",
+                        color: "rgba(210, 38, 30, 1.0)",
                     }
                 }]
             }
