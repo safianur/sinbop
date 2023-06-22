@@ -119,8 +119,9 @@ $year = date('Y');
 			</div>
 		</div>
 	</div>
+	
 	<!-- Card Header - Dropdown -->
-	<div class="card shadow col-md-12 mb-4">
+	<div class="card shadow col-xl-12 col-md-6 mb-5">
 		<!-- Card Header - Dropdown -->
 		<div class="card-header py-1 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary">Pengeluaran Kantor INKA Banyuwangi Periode <?= date('Y') ?></h6>

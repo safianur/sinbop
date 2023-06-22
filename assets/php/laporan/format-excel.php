@@ -14,7 +14,7 @@
 
 <h1 style="font-size: 20;">
     RINCIAN PENGELUARAN BIAYA OPERASIONAL<br>
-    KANTOR INKA PERWAKILAN BANYUWANGI<br>
+    PABRIK BANYUWANGI PT INKA (Persero)<br>
     PERIODE <?= date('F Y', strtotime($dari))?>
 </h1>
 <table border="1">

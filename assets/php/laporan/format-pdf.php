@@ -74,7 +74,7 @@ body {
 <body>
     <div style="text-align: center">
         <h3>RINCIAN PENGELUARAN BIAYA OPERASIONAL<br>
-        KANTOR INKA PERWAKILAN BANYUWANGI<br>
+        PABRIK BANYUWANGI PT INKA (Persero)<br>
         Periode ' . date('F Y', strtotime($dari)) . '</h3>
     </div>';
     $html.=

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Mar 2023 pada 10.07
+-- Waktu pembuatan: 03 Apr 2023 pada 11.11
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 7.3.30
 
@@ -38,8 +38,9 @@ CREATE TABLE `biaya` (
 --
 
 INSERT INTO `biaya` (`id_biaya`, `tanggal`, `saldo_biaya`) VALUES
-(2, '2023-02-01', 10000000),
-(5, '2023-01-01', 13150000);
+(2, '2023-02-01', 13125000),
+(5, '2023-01-01', 13125000),
+(8, '2023-03-01', 13125000);
 
 -- --------------------------------------------------------
 
@@ -57,10 +58,7 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nm_kategori`) VALUES
-(1, 'PDAM, Token Listrik, & Iuran Kebersihan'),
-(2, 'Kendaraan (Motor/Mobil) Operasional'),
-(5, 'Pembelian Bahan Bakar Bensin'),
-(9, 'Kebutuhan Kantor');
+(14, 'Pengeluaran Total Bulanan');
 
 -- --------------------------------------------------------
 
@@ -82,24 +80,10 @@ CREATE TABLE `pengeluaran` (
 --
 
 INSERT INTO `pengeluaran` (`id_pengeluaran`, `id_kategori`, `tanggal`, `nm_pembelanja`, `item_belanja`, `jumlah`) VALUES
-(4, 5, '2023-02-09', 'Pak Rahman', 'Kompor', 200000),
-(5, 1, '2023-02-28', 'Pak Bahri', 'Iuran Kebersihan', 100000),
-(8, 1, '2023-02-06', 'safia', 'bayar listrik', 500000),
-(10, 1, '2023-02-01', 'pak deny', 'PDAM mess', 60000),
-(11, 5, '2023-02-01', 'aris', 'lampu', 150000),
-(12, 9, '2023-03-02', 'Faris', 'ATK', 200000),
-(13, 2, '2023-02-15', 'aris', 'Pertalite mobil', 250000),
-(14, 9, '2023-01-17', 'vika', 'piring', 150000),
-(15, 2, '2023-03-01', 'Aris', 'BBM Motor', 50000),
-(16, 2, '2023-02-07', 'Aris', 'BBM Mobil', 200000),
-(17, 9, '2023-02-13', 'Faris', 'ATK', 150000),
-(18, 9, '2023-02-15', 'Aris', 'Meja', 400000),
-(19, 1, '2023-02-19', 'Aris', 'Kebersihan', 200000),
-(20, 9, '2023-02-20', 'Aris', 'Bunga', 500000),
-(21, 5, '2023-02-22', 'Aris', 'BBM Motor', 30000),
-(22, 9, '2023-02-27', 'Aris', 'Kursi', 200000),
-(23, 5, '2023-02-28', 'Aris', 'Pertalite', 150000),
-(24, 1, '2023-02-24', 'Faris', 'Listrik', 100000);
+(3, 12, '2023-02-11', 'Faris', 'Konsumsi Kerja Bakti', 250000),
+(7, 14, '2023-01-31', 'Faris', 'Total Bulanan', 14085848),
+(8, 14, '2023-02-28', 'Faris', 'BIOP Februari', 16245934),
+(9, 14, '2023-03-31', 'Vika', 'BIOP Maret 2023', 17695845);
 
 -- --------------------------------------------------------
 
@@ -119,7 +103,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `level_user`) VALUES
-(1, 'admin', 'admin', 'Admin'),
+(1, 'admin', 'sekrebwi2023', 'Admin'),
 (2, 'user', 'user', 'User');
 
 --
@@ -158,19 +142,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `biaya`
 --
 ALTER TABLE `biaya`
-  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_pengeluaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

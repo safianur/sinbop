@@ -84,8 +84,6 @@
 <!-- BEGIN: Body-->
 <body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
 	  data-color="bg-gradient-x-purple-blue" data-col="-columns">
-<!-- <body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
-	  data-color="bg-gradient-x-black" data-col="-columns"> -->
 
 <!-- BEGIN: Header-->
 <nav
@@ -136,8 +134,7 @@
 					<img class="brand-logo"
 						 alt="Chameleon admin logo"
 						 src="./assets/images/logo/keyeta-nih-2.png"/>
-					<h3 class="brand-text">MonKePerBa</h3>
-					<!-- <font size="1">(Monitoring Keuangan Perwakilan Banyuwangi)</font> -->
+					<h3 class="brand-text">Keu Pwk Bwi</h3>
 				</a>
 			</li>
 			<li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>

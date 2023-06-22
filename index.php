@@ -31,8 +31,6 @@
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
-            /* background:rgba(0, 0, 0, 0.5); */
-            /* background-color: #C2DED1; */
             height: 410px;
             margin: auto;
             width: 329px;
@@ -49,7 +47,7 @@
             width: 400px;
             min-height: 300px;
             background: #FFF;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0 0 5px rgba(0,0,0,.3);
             padding: 40px 30px;
         }
@@ -57,10 +55,9 @@
         .avatar {
             width: 100px;
             height: 35px;
-            /* border-radius: 50%; */
             position: absolute;
-            top: 160px;
-            left: calc(50% - 50px);
+            margin-top: -50px;
+            margin-left: 80px;
         }
 
         .container .login-text {
